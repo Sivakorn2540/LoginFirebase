@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">LoginFirebase</string>
+
+    <string name="facebook_app_id">382055105653036</string>
+    <string name="fb_login_protocol_scheme">fb382055105653036</string>
+
+
+    <string name="username_lb">ชื่อผู้ใช้</string>
+    <string name="password_lb">รหัสผ่าน</string>
+    <string name="login_bt">เข้าสู่ระบบ</string>
+    <string name="gender_lb">เพศ</string>
+    <string name="age_lb">อายุ</string>
+    <string name="firstname_lb">ชื่อ</string>
+    <string name="lastname_lb">นามสกุล</string>
+    <string name="continue_lb">ดำเนินการต่อ</string>
+    <string name="type_lb">ประเภทผู้ใช้</string>
+    <string name="register_lb">สมัครสมาชิก</string>
+    <string name="confirm_lb">ยืนยันรหัสผ่าน</string>
+    <string name="type_lb1">ลูก</string>
+    <string name="type_lb2">ผู้ปกครอง</string>
+    <string name="tel_lb">เบอร์โทร</string>
+</resources>
