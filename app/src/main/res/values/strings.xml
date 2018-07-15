@@ -15,7 +15,7 @@
     <string name="continue_lb">ดำเนินการต่อ</string>
     <string name="type_lb">ประเภทผู้ใช้</string>
     <string name="register_lb">สมัครสมาชิก</string>
-    <string name="confirm_lb">ยืนยันรหัสผ่าน</string>
+    <string name="confirm_lb">รหัสผ่านอีกครั้ง</string>
     <string name="type_lb1">ลูก</string>
     <string name="type_lb2">ผู้ปกครอง</string>
     <string name="tel_lb">เบอร์โทร</string>

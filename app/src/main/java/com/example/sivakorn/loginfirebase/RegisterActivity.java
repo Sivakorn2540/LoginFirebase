@@ -32,14 +32,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         //..button
-        btnSign = findViewById(R.id.signup_bt);
-        inputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputUsername);
-        inputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputUsername);
-        inputLayoutConfirm = (TextInputLayout) findViewById(R.id.inputLayoutConfirm);
+        btnSign = findViewById(R.id.bt_login_signup);
+        inputLayoutEmail = (TextInputLayout) findViewById(R.id.ti_register_username);
+        inputLayoutPassword = (TextInputLayout) findViewById(R.id.ti_register_password);
+        inputLayoutConfirm = (TextInputLayout) findViewById(R.id.ti_register_password_confirm);
         //..edittext
-        etEmail = findViewById(R.id.email_et);
-        etPassword = findViewById(R.id.password_et);
-        etConfirm = findViewById(R.id.confirm_et);
+        etEmail = findViewById(R.id.et_login_username);
+        etPassword = findViewById(R.id.et_login_password);
+        etConfirm = findViewById(R.id.et_register_password_confirm);
 
         //..onclick
         btnSign.setOnClickListener(this);
@@ -106,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.signup_bt:
+            case R.id.bt_login_signup:
                 registerMt();
                 break;
             default:

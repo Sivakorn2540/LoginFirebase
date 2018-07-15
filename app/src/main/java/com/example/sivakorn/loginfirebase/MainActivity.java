@@ -56,7 +56,8 @@ import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
-    private Button btnLogin, btnRegister;
+    private Button btnLogin, btnRegister, btnGmailLogin, btnFacebookLogin;
+    private  LoginButton loginButton;
     private EditText etUsername, etPassword;
     private CallbackManager mCallbackManager;
     private TextInputLayout inputLayoutUser, inputLayoutPassword;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG_Gmail = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,32 +75,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
 
         //..button..
-        btnLogin = findViewById(R.id.login_bt);
-        btnRegister = findViewById(R.id.register_bt);
-
+        btnLogin = findViewById(R.id.bt_login_login_local);
+        btnRegister = findViewById(R.id.bt_login_signup);
+        btnGmailLogin = findViewById(R.id.bt_login_login_gmail);
+        btnFacebookLogin = findViewById(R.id.bt_login_login_facebook);
         //..inputLayout
-        inputLayoutUser = (TextInputLayout) findViewById(R.id.textInputUsername);
-        inputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputUsername);
+        inputLayoutUser = (TextInputLayout) findViewById(R.id.ti_login_username);
+        inputLayoutPassword = (TextInputLayout) findViewById(R.id.ti_login_password);
         //..edittext..
-        etUsername = findViewById(R.id.username_et);
-        etPassword = findViewById(R.id.password_et);
+        etUsername = findViewById(R.id.et_login_username);
+        etPassword = findViewById(R.id.et_login_password);
 
         //gmail
         // Set the dimensions of the sign-in button.
-        SignInButton signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        //SignInButton signInButton = findViewById(R.id.sign_in_button);
+        // signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         //.. onclick
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        btnGmailLogin.setOnClickListener(this);
+        btnFacebookLogin.setOnClickListener(this);
+        //findViewById(R.id.sign_in_button).setOnClickListener(this);
 
         queue = Volley.newRequestQueue(this);
         loadingDialog = new ProgressDialog(this);
         GenerateHashKey();
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -148,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.i(TAG_Gmail, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -159,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.i(TAG_Gmail, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            if(user!=null){
+                            if (user != null) {
                                 CheckUserIsExist(user.getUid().toString());
                             }
                         } else {
@@ -172,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
     }
+
     private void signInGmial() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -189,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.i(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
-                            if(user!=null){
+                            if (user != null) {
                                 CheckUserIsExist(user.getUid().toString());
 //                                for (UserInfo profile : user.getProviderData()) {
 //                                    // Id of the provider (ex: google.com)
@@ -239,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.i("signIn", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
-                            if(user!=null){
+                            if (user != null) {
                                 CheckUserIsExist(user.getUid().toString());
                             }
                         } else {
@@ -351,14 +358,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.login_bt:
+            case R.id.bt_login_login_local:
                 signInMt();
                 break;
-            case R.id.register_bt:
+            case R.id.bt_login_signup:
                 gotoRegister();
                 break;
-            case R.id.sign_in_button:
+            case R.id.bt_login_login_gmail:
                 signInGmial();
+            case R.id.bt_login_login_facebook:
+                loginButton.performClick();
             default:
                 break;
         }
